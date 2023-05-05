@@ -132,51 +132,52 @@ gridItems.forEach(item => {
 
 
 
-// target elements with the "draggable" class
-interact('.draggable')
+// Sélectionnez l'élément à glisser
+const draggableElement = document.querySelector('.draggable');
+
+// Enregistrer la position initiale de l'élément
+let initialX, initialY;
+interact(draggableElement)
   .draggable({
-    // enable inertial throwing
-    inertia: true,
-    // keep the element within the area of it's parent
-   
-    // enable autoScroll
+    // activer la détection des collisions avec d'autres éléments
     autoScroll: true,
-
-    listeners: {
-      // call this function on every dragmove event
-      move: dragMoveListener,
-
-      // call this function on every dragend event
-      end (event) {
-        var textEl = event.target.querySelector('p')
-        event.target.style.transform = 'translate(0px, 0px)';
-
-        textEl && (textEl.textContent =
-          'moved a distance of ' +
-          (Math.sqrt(Math.pow(event.pageX - event.x0, 2) +
-                     Math.pow(event.pageY - event.y0, 2) | 0))
-            .toFixed(2) + 'px')
-      }
+    // définir une fonction pour restreindre le déplacement dans un parent
+    restrict: {
+      restriction: document.querySelector('.container'),
+      elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+      endOnly: true
     },
+    // appelé lorsqu'un élément est déplacé
+    onmove: function (event) {
+      // calculer la nouvelle position en ajoutant le mouvement à la position initiale
+      const target = event.target;
+      const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+      const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
-    
+      // déplacer l'élément à la nouvelle position
+      target.style.transform = `translate(${x}px, ${y}px)`;
 
-    
-  })
-
-function dragMoveListener (event) {
-  var target = event.target
-  // keep the dragged position in the data-x/data-y attributes
-  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
-
-  // translate the element
-  target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
-
-  // update the posiion attributes
-  target.setAttribute('data-x', x)
-  target.setAttribute('data-y', y)
-}
-
-// this function is used later in the resizing and gesture demos
-window.dragMoveListener = dragMoveListener
+      // mettre à jour les attributs de position de l'élément
+      target.setAttribute('data-x', x);
+      target.setAttribute('data-y', y);
+    },
+    // appelé lorsqu'un élément est activé pour le glissement
+    onstart: function (event) {
+      // enregistrer la position initiale de l'élément
+      initialX = parseFloat(event.target.getAttribute('data-x')) || 0;
+      initialY = parseFloat(event.target.getAttribute('data-y')) || 0;
+    },
+    // appelé lorsqu'un élément est relâché après un glissement
+    onend: function (event) {
+      // réinitialiser la position de l'élément à la position initiale
+      //event.target.style.transform = `translate(${initialX}px, ${initialY}px)`;
+      gsap.to(event.target, {
+        x: initialX ,
+        y: initialY ,
+        ease: "power4.inOut",
+        duration:.5
+      });
+      event.target.setAttribute('data-x', initialX);
+      event.target.setAttribute('data-y', initialY);
+    }
+  });
