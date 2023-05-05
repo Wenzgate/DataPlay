@@ -122,6 +122,7 @@ section:nth-of-type(3){
   position: relative;
   display: flex;
   flex-direction: row;
+  z-index: 200;
 }
 
 .wrapper{
@@ -135,15 +136,24 @@ section:nth-of-type(3){
   width: 100px;
   position: absolute;
   height: 100px;
+  touch-action: none;
+  transform-origin: center center;
+  
 }
 
 .wrapperAlcool__img{
   background-image: url(../assets/img/avatar_2.png);
   background-size: cover;
+  position: absolute;
   width: 100px;
   height: 100px;
+  touch-action: none
 }
 
   
 
+
+.return-animation {
+  transition: transform 0.5s ease-out;
+}
 
