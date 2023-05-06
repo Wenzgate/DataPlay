@@ -1,7 +1,7 @@
 "use strict"
 
 // Loading Bar //
- 
+
 function startProgressBar() {
   let percent = 0;
   const sectionLoading = document.querySelector('.section_loading')
@@ -18,11 +18,11 @@ function startProgressBar() {
      // Finish if progress is 100%
     if (percent >= 98) {
       clearInterval(intervalId);
-      gsap.to(sectionLoading, { 
-        x: "-100%", 
-        duration: 1, 
-        delay: .5, 
-        ease:"power4.inOut"  
+      gsap.to(sectionLoading, {
+        x: "-100%",
+        duration: 1,
+        delay: .5,
+        ease:"power4.inOut"
       });
     }
   }, 500);
@@ -59,7 +59,10 @@ const gridItems = document.querySelectorAll('.gridSelection__item');
 const body = document.querySelector('body');
 const containerCustomize = document.querySelector('.container__customize')
 const sectionSelection = document.querySelector('.section__selection')
-const drag_item = document.querySelector('.draggable') 
+const drag_item = document.querySelector('.draggable')
+const gridSelection = document.querySelectorAll('.gridSelection')
+const customizeButton = document.querySelector('.container__customize__button')
+const containerDrugs = document.querySelector('.container__drugs')
 
 const centerX = body.clientWidth / 2 - 75;
 const centerY = body.clientHeight / 2 - 300;
@@ -74,10 +77,9 @@ gridItems.forEach(item => {
       top: centerY,
       scale: 2,
       duration: .5,
-      position : "absolute",
       pointerEvents :'none',
       ease : "power4.inOut",
-      
+
     });
 
     gridItems.forEach(otherItem => {
@@ -94,15 +96,29 @@ gridItems.forEach(item => {
     });
 
     function showSlider(){
-      gsap.set(containerCustomize, {
-        display:"flex"
+      sectionSelection.insertBefore(item, sectionSelection.firstElementChild);
+      sectionSelection.style.alignItems = "flex-end"
+
+      gsap.set(gridSelection, {
+        display:"none"
       });
+      gsap.set(containerCustomize,{
+        display:"flex"
+      })
     }
   });
 });
 
 
 // Avatar Selection //
+
+ customizeButton.addEventListener('click', () => {
+   gsap.set(containerCustomize, {
+     display:"none"
+   });
+   containerDrugs.style.display = "flex";
+   
+ })
 
 
 // Dragging //
@@ -135,7 +151,7 @@ interact('.draggable').draggable({
 
   onend: function (event) {
     const target = event.target;
-    
+
     if (target.hasAttribute('data-dropped')) {
       // Make the element disappear
       gsap.to(target, {
@@ -154,8 +170,8 @@ interact('.draggable').draggable({
             }
           })
 
-          
-          
+
+
           // Remove the data-dropped attribute
           target.removeAttribute('data-dropped');
         },
@@ -172,15 +188,15 @@ interact('.draggable').draggable({
       event.target.setAttribute('data-x', initialX);
       event.target.setAttribute('data-y', initialY);
     })
-        
+
   },
-  
+
 });
 
 
 
-const targetWidth = drag_item.offsetWidth * 1.5
-const targetHeight = drag_item.offsetHeight * 1.5
+const targetWidth = $('.draggable').width() * 1.5;
+const targetHeight = $('.draggable').height() * 1.5;
 
 
 // Dragging //
@@ -216,7 +232,7 @@ interact('.dropzone').dropzone({
     var draggableElement = event.relatedTarget
     event.target.classList.remove('drop-target')
     event.relatedTarget.classList.remove('can-drop')
-    
+
     gsap.to(draggableElement,{
       width : targetWidth / 1.5,
       height : targetHeight / 1.5,
@@ -227,18 +243,18 @@ interact('.dropzone').dropzone({
 
   ondrop: function (event) {
     var draggableElement = event.relatedTarget;
-    
+
     // Add a custom attribute to indicate that the element has been dropped
     draggableElement.setAttribute('data-dropped', 'true');
   },
-  
+
   ondropdeactivate: function (event) {
     event.target.classList.remove('drop-active')
     event.target.classList.remove('drop-target')
   }
 })
 
-  
+
 // Dropping //
 
-  
+

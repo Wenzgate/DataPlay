@@ -10,6 +10,7 @@
     <script src="script/app.js" defer></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js" integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.17/interact.js" integrity="sha512-tOggANFWm10wOpOiRBtpPdqTSGUhkhM17eMSCB5iGVendPzV2P0fb4o461WgacyFPJYaqWzgxNOhFojg3+a8CQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
@@ -24,15 +25,16 @@
     </section>
 
     <section class="section section__selection">
+
       <div class="gridSelection col1">
-        <div class="gridSelection__item"></div>
-        <div class="gridSelection__item"></div>
-        <div class="gridSelection__item"></div>
+        <div class="gridSelection__item a"></div>
+        <div class="gridSelection__item b"></div>
+        <div class="gridSelection__item c"></div>
       </div>
       <div class="gridSelection col2">
-        <div class="gridSelection__item"></div>
-        <div class="gridSelection__item"></div>
-        <div class="gridSelection__item"></div>
+        <div class="gridSelection__item d"></div>
+        <div class="gridSelection__item e"></div>
+        <div class="gridSelection__item f"></div>
       </div> 
 
       <div class="container__customize">
@@ -41,10 +43,10 @@
         <label class="container__customize--value" for="age">Age : 50</label>
 
         <input type="range" name="wheight" min="30" max="150" value="90" step="1" class="section__customize__range1">
-        <label class="container__customize--value" for="age">Wheight : 90</label>
+        <label class="container__customize--value" for="wheight">Wheight : 90</label>
 
         <input type="range" name="height" min="120" max="210" value="165" step="1" class="section__customize__range1">
-        <label class="container__customize--value" for="age">Height : 165</label>
+        <label class="container__customize--value" for="height">Height : 165</label>
 
         <button class="container__customize__button">Suivant</button>
 
@@ -52,22 +54,40 @@
 
       <div class="container__drugs">
           <div class="wrapper wrapperWeed">
-            <div class="wrapperWeed__img draggable drag-drop " id="yes-drop"></div>
+            <span class="wrapper__digit">01</span>
+            <div class="wrapper__selection">
+              <button>-</button>
+              <div class="wrapper__center">
+                <div class="wrapperWeed__img draggable drag-drop " id="yes-drop"></div>
+              </div>
+              <button>+</button>
+            </div>
+            
             <select name="frequency" id="weedFrequency">
-              <option value="day">day</option>
-              <option value="week">week</option>
-              <option value="month">month</option>
-              <option value="year">year</option>
+              <option value="day">per day</option>
+              <option value="week">per week</option>
+              <option value="month">per month</option>
+              <option value="year">per year</option>
             </select>
           </div>
 
           <div class="wrapper wrapperAlcool">
-            <div class="wrapperAlcool__img draggable drag-drop" id="yes-drop"></div>
+
+            <span class="wrapper__digit">01</span>
+
+            <div class="wrapper__selection">
+              <button>-</button>
+              <div class="wrapper__center">
+                <div class="wrapperAlcool__img draggable drag-drop " id="yes-drop"></div>
+              </div>
+              <button>+</button>
+            </div>
+
             <select name="frequency" id="alcoolFrequency">
-              <option value="day">day</option>
-              <option value="week">week</option>
-              <option value="month">month</option>
-              <option value="year">year</option>
+              <option value="day">per day</option>
+              <option value="week">per week</option>
+              <option value="month">per month</option>
+              <option value="year">per year</option>
             </select>
           </div>
 

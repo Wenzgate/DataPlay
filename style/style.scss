@@ -7,6 +7,7 @@ body{
     height: 100vh;
     font-family: sans-serif;
     background-color: white;
+    overflow: hidden;
 }
 
 section {
@@ -33,11 +34,7 @@ section:nth-of-type(2){
   flex-direction: row;
 }
 
-section:nth-of-type(3){
-  z-index: 99;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .progress {
     display: flex;
@@ -108,9 +105,9 @@ section:nth-of-type(3){
 .container__customize{
   display: none;
   flex-direction: column;
-  top: 200px;
+  margin-bottom: 300px;
   position: relative;
-  right: 100px;
+  align-items: center;
 }
 
 .container__customize__button{
@@ -120,14 +117,53 @@ section:nth-of-type(3){
 
 .container__drugs{
   position: relative;
-  display: flex;
+  display: none;
   flex-direction: row;
   z-index: 200;
+  background-color: rebeccapurple;
+  margin-bottom: 200px;
 }
 
 .wrapper{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:200px;
+  background-color: red;
+  
+
+  &:nth-of-type(2){
+    margin-left: 50px;
+  }
+
+  &__selection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+
+    & button {
+      align-self: flex-end;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__center {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    
+  }
+
+  & select {
+    width: 100%;
+    text-align: center;
+  }
+  
 }
 
 .wrapperWeed__img{
@@ -148,6 +184,11 @@ section:nth-of-type(3){
   width: 100px;
   height: 100px;
   touch-action: none
+}
+
+.draggable{
+  
+  
 }
 
   
